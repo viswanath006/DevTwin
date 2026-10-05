@@ -155,22 +155,33 @@ DevTwin/
 │               ├── mockProvider.js    # Zero-key offline heuristic engine
 │               ├── geminiProvider.js  # Google Gemini 2.5 Flash / Pro
 │               └── openaiProvider.js  # OpenAI GPT-4o / OpenRouter
+│   └── tests/                     # Dedicated Backend Verification & Integration Suites
+│       ├── test-final-integration.js # Complete 12-capability system test
+│       ├── test-verification.js      # Sandbox test engine validation
+│       └── audit-flow-verification.js# Live HTTP audit suite
 ├── client/                        # Modern React Frontend (Vite)
 │   └── src/
-│       ├── index.css              # Obsidian cosmic design system & tokens
+│       ├── index.css              # Obsidian cosmic design system & glassy finish tokens
 │       ├── App.jsx                # Layout orchestrator & navigation
 │       ├── api/client.js          # Resilient Axios/Fetch backend bridge
-│       └── components/            # Dedicated Views
-│           ├── MasterReferenceView.jsx # Grand Finale cosmic twin workspace
-│           ├── DashboardView.jsx       # System overview & topology
-│           ├── AIDebuggerView.jsx      # Diagnostic engine & patch verification
-│           ├── ImpactAnalyzerView.jsx  # Multi-modal blast radius predictor
-│           ├── SecurityScannerView.jsx # Security vulnerability audit
-│           ├── ArchitectureView.jsx    # Drift detection & layer dependency graph
-│           ├── CodeReviewView.jsx      # PR review & risk categorization
-│           ├── AskCodebaseView.jsx     # Grounded natural language codebase Q&A
-│           ├── GitIntelligenceView.jsx # Churn, hotspots & risk heatmaps
-│           └── WhatIfAnalysisView.jsx  # Speculative architectural simulation
+│       └── components/            # Modular Component Architecture
+│           ├── layout/            # Navigation Header & Cosmic Sidebar
+│           │   ├── Header.jsx
+│           │   └── Sidebar.jsx
+│           ├── views/             # 12 Dedicated Twin Feature Views
+│           │   ├── DashboardView.jsx
+│           │   ├── AIDebuggerView.jsx
+│           │   ├── ImpactAnalyzerView.jsx
+│           │   ├── SecurityScannerView.jsx
+│           │   ├── CodeReviewView.jsx
+│           │   ├── AskCodebaseView.jsx
+│           │   ├── GitIntelligenceView.jsx
+│           │   ├── ArchitectureView.jsx
+│           │   ├── WhatIfAnalysisView.jsx
+│           │   └── MasterReferenceView.jsx
+│           ├── common/            # Reusable Widgets & Health Indicators
+│           │   └── CodebaseHealthCard.jsx
+│           └── index.js           # Clean barrel exports
 └── sample-projects/               # Pre-bundled evaluation repositories
     ├── demo-cloud-app/            # Express SaaS app with realistic DB defect
     └── demo-polyglot/             # Multi-language app (Java, Python, TS, Go)

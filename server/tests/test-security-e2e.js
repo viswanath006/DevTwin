@@ -1,10 +1,10 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs/promises';
-import { runSecurityScan } from './services/securityScanner.js';
-import { scanCodebase } from './services/codebaseScanner.js';
-import { buildDependencyGraph } from './services/dependencyGraph.js';
-import { analyzeCodebaseDeep } from './services/codebaseAnalyzer.js';
+import { runSecurityScan } from '../src/services/securityScanner.js';
+import { scanCodebase } from '../src/services/codebaseScanner.js';
+import { buildDependencyGraph } from '../src/services/dependencyGraph.js';
+import { analyzeCodebaseDeep } from '../src/services/codebaseAnalyzer.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

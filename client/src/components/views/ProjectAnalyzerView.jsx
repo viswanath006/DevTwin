@@ -10,7 +10,7 @@ import {
   Flame,
   Layers,
 } from 'lucide-react';
-import { api } from '../api/client';
+import { api } from '../../api/client';
 
 function TreeNode({ node, onSelectFile, selectedFile, level = 0 }) {
   const [isOpen, setIsOpen] = useState(level < 2);

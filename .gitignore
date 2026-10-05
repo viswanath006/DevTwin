@@ -10,6 +10,10 @@ package-lock.json
 dist/
 build/
 .cache/
+target/
+.pytest_cache/
+__pycache__/
+*.pyc
 
 # OS and Editor
 .DS_Store

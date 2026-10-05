@@ -7,7 +7,7 @@ import {
   CheckCircle2,
   Sparkles,
 } from 'lucide-react';
-import { api } from '../api/client';
+import { api } from '../../api/client';
 
 export default function MasterReferenceView({
   scanData,

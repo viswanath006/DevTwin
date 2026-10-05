@@ -1,9 +1,9 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { scanCodebase } from './services/codebaseScanner.js';
-import { buildDependencyGraph } from './services/dependencyGraph.js';
-import { analyzeCodebaseDeep } from './services/codebaseAnalyzer.js';
-import { calculateCodebaseHealthScore } from './services/healthScore.js';
+import { scanCodebase } from '../src/services/codebaseScanner.js';
+import { buildDependencyGraph } from '../src/services/dependencyGraph.js';
+import { analyzeCodebaseDeep } from '../src/services/codebaseAnalyzer.js';
+import { calculateCodebaseHealthScore } from '../src/services/healthScore.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

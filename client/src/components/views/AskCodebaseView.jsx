@@ -23,7 +23,7 @@ import {
   BookOpen,
   Bug,
 } from 'lucide-react';
-import { api } from '../api/client';
+import { api } from '../../api/client';
 
 const SUGGESTED_QUESTIONS = [
   { text: 'How does login work?', category: 'Architecture' },

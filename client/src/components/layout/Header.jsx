@@ -150,79 +150,49 @@ export default function Header({
       {/* Right: Switcher Pills + Scan/Demo buttons */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 4 }}>
         {/* Navigation Pills */}
-        <button
-          onClick={() => setActiveTab('dashboard')}
-          style={{
-            background: activeTab === 'dashboard' ? '#FFFFFF' : 'rgba(255, 255, 255, 0.05)',
-            color: activeTab === 'dashboard' ? '#0F172A' : '#CBD5E1',
-            border: activeTab === 'dashboard' ? 'none' : '1px solid rgba(255, 255, 255, 0.1)',
-            borderRadius: 20,
-            padding: '6px 18px',
-            fontSize: '0.82rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            transition: 'all 0.15s ease',
-          }}
-        >
-          Twin
-        </button>
-
-        <button
-          onClick={() => setActiveTab('debugger')}
-          style={{
-            background: activeTab === 'debugger' ? '#FFFFFF' : 'rgba(255, 255, 255, 0.05)',
-            color: activeTab === 'debugger' ? '#0F172A' : '#CBD5E1',
-            border: activeTab === 'debugger' ? 'none' : '1px solid rgba(255, 255, 255, 0.1)',
-            borderRadius: 20,
-            padding: '6px 18px',
-            fontSize: '0.82rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            transition: 'all 0.15s ease',
-          }}
-        >
-          Debug
-        </button>
-
-        <button
-          onClick={() => setActiveTab('impact')}
-          style={{
-            background: activeTab === 'impact' ? '#FFFFFF' : 'rgba(255, 255, 255, 0.05)',
-            color: activeTab === 'impact' ? '#0F172A' : '#CBD5E1',
-            border: activeTab === 'impact' ? 'none' : '1px solid rgba(255, 255, 255, 0.1)',
-            borderRadius: 20,
-            padding: '6px 18px',
-            fontSize: '0.82rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            transition: 'all 0.15s ease',
-          }}
-        >
-          Impact
-        </button>
-
-        <button
-          onClick={() => setActiveTab('security')}
-          style={{
-            background: activeTab === 'security' ? '#FFFFFF' : 'rgba(255, 255, 255, 0.05)',
-            color: activeTab === 'security' ? '#0F172A' : '#CBD5E1',
-            border: activeTab === 'security' ? 'none' : '1px solid rgba(255, 255, 255, 0.1)',
-            borderRadius: 20,
-            padding: '6px 18px',
-            fontSize: '0.82rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            transition: 'all 0.15s ease',
-          }}
-        >
-          Security
-        </button>
+        {[
+          { id: 'dashboard', label: 'Twin' },
+          { id: 'debugger', label: 'Debug' },
+          { id: 'impact', label: 'Impact' },
+          { id: 'security', label: 'Security' },
+        ].map((item) => {
+          const isActive = activeTab === item.id;
+          return (
+            <button
+              key={item.id}
+              onClick={() => setActiveTab(item.id)}
+              style={{
+                background: isActive
+                  ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(241, 245, 249, 0.88) 100%)'
+                  : 'rgba(255, 255, 255, 0.04)',
+                backdropFilter: 'blur(14px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(14px) saturate(180%)',
+                color: isActive ? '#070913' : '#94A3B8',
+                border: isActive ? '1px solid rgba(255, 255, 255, 0.7)' : '1px solid rgba(255, 255, 255, 0.09)',
+                boxShadow: isActive
+                  ? 'inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 4px 14px rgba(255, 255, 255, 0.2)'
+                  : 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 6px rgba(0, 0, 0, 0.25)',
+                borderRadius: 20,
+                padding: '6px 18px',
+                fontSize: '0.82rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+              }}
+            >
+              {item.label}
+            </button>
+          );
+        })}
 
         {/* Runs locally badge */}
         <div
           style={{
             background: 'rgba(16, 185, 129, 0.1)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
             border: '1px solid rgba(16, 185, 129, 0.25)',
+            boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1)',
             color: '#34D399',
             borderRadius: 20,
             padding: '6px 14px',
@@ -252,15 +222,19 @@ export default function Header({
           title="Re-scan codebase"
           style={{
             background: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(14px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(14px) saturate(180%)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 2px 8px rgba(0, 0, 0, 0.25)',
             color: '#CBD5E1',
             borderRadius: 20,
-            padding: '6px 12px',
+            padding: '6px 14px',
             fontSize: '0.78rem',
-            cursor: 'pointer',
+            cursor: isScanning ? 'not-allowed' : 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: 4,
+            gap: 5,
+            transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         >
           <RefreshCw size={12} className={isScanning ? 'spin' : ''} />
@@ -272,17 +246,21 @@ export default function Header({
           disabled={isScanning}
           title="Load built-in SaaS demo project"
           style={{
-            background: 'linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(255, 142, 83, 0.15) 100%)',
-            border: '1px solid rgba(255, 107, 107, 0.4)',
+            background: 'linear-gradient(135deg, rgba(255, 107, 107, 0.22) 0%, rgba(255, 142, 83, 0.18) 100%)',
+            backdropFilter: 'blur(14px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(14px) saturate(180%)',
+            border: '1px solid rgba(255, 107, 107, 0.45)',
+            boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.35), 0 3px 12px rgba(255, 107, 107, 0.22)',
             color: '#FF8E53',
             borderRadius: 20,
             padding: '6px 14px',
             fontSize: '0.78rem',
             fontWeight: 600,
-            cursor: 'pointer',
+            cursor: isScanning ? 'not-allowed' : 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: 5,
+            transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         >
           <Sparkles size={12} />
@@ -305,12 +283,19 @@ export default function Header({
           title="Upload project folder"
           style={{
             background: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(14px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(14px) saturate(180%)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 2px 8px rgba(0, 0, 0, 0.25)',
             color: '#94A3B8',
             borderRadius: 20,
-            padding: '6px 10px',
+            padding: '6px 12px',
             fontSize: '0.78rem',
-            cursor: 'pointer',
+            cursor: isScanning ? 'not-allowed' : 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         >
           <Upload size={12} />

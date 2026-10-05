@@ -1,9 +1,9 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { scanCodebase } from './services/codebaseScanner.js';
-import { buildDependencyGraph } from './services/dependencyGraph.js';
-import { analyzeCodebaseDeep } from './services/codebaseAnalyzer.js';
-import { askCodebase } from './services/askCodebase.js';
+import { scanCodebase } from '../src/services/codebaseScanner.js';
+import { buildDependencyGraph } from '../src/services/dependencyGraph.js';
+import { analyzeCodebaseDeep } from '../src/services/codebaseAnalyzer.js';
+import { askCodebase } from '../src/services/askCodebase.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DEMO_PROJECT_PATH = path.resolve(__dirname, '../../sample-projects/demo-cloud-app');

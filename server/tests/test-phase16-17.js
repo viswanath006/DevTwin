@@ -1,8 +1,8 @@
-import { scanCodebase } from './services/codebaseScanner.js';
-import { buildDependencyGraph } from './services/dependencyGraph.js';
-import { analyzeCodebaseDeep } from './services/codebaseAnalyzer.js';
-import { detectArchitectureDrift, DEFAULT_ARCHITECTURE_RULES } from './services/architectureDrift.js';
-import { simulateWhatIfChange } from './services/whatIfSimulator.js';
+import { scanCodebase } from '../src/services/codebaseScanner.js';
+import { buildDependencyGraph } from '../src/services/dependencyGraph.js';
+import { analyzeCodebaseDeep } from '../src/services/codebaseAnalyzer.js';
+import { detectArchitectureDrift, DEFAULT_ARCHITECTURE_RULES } from '../src/services/architectureDrift.js';
+import { simulateWhatIfChange } from '../src/services/whatIfSimulator.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 

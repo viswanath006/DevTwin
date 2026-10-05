@@ -1,7 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { testRunner } from './services/testRunner.js';
-import { scanCodebase } from './services/codebaseScanner.js';
+import { testRunner } from '../src/services/testRunner.js';
+import { scanCodebase } from '../src/services/codebaseScanner.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SAMPLE_PATH = path.resolve(__dirname, '../../sample-projects/demo-polyglot');

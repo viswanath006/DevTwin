@@ -1,4 +1,4 @@
-import { performCodeReview } from './services/codeReviewer.js';
+import { performCodeReview } from '../src/services/codeReviewer.js';
 
 async function runPhase13Verification() {
   console.log('====================================================');

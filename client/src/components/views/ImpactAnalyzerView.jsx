@@ -4,7 +4,7 @@ import {
   RefreshCw,
   CheckCircle2,
 } from 'lucide-react';
-import { api } from '../api/client';
+import { api } from '../../api/client';
 
 const PRESETS = [
   {

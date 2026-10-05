@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   RefreshCw,
 } from 'lucide-react';
-import { api } from '../api/client';
+import { api } from '../../api/client';
 
 const DEMO_FINDINGS = [
   {

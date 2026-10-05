@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from './components/Sidebar';
-import Header from './components/Header';
-import DashboardView from './components/DashboardView';
-import ProjectAnalyzerView from './components/ProjectAnalyzerView';
-import AIDebuggerView from './components/AIDebuggerView';
-import ImpactAnalyzerView from './components/ImpactAnalyzerView';
-import TestVerificationView from './components/TestVerificationView';
-import SecurityScannerView from './components/SecurityScannerView';
-import CodeReviewView from './components/CodeReviewView';
-import AskCodebaseView from './components/AskCodebaseView';
-import GitIntelligenceView from './components/GitIntelligenceView';
-import ArchitectureView from './components/ArchitectureView';
-import WhatIfAnalysisView from './components/WhatIfAnalysisView';
-import MasterReferenceView from './components/MasterReferenceView';
+import {
+  Sidebar,
+  Header,
+  DashboardView,
+  ProjectAnalyzerView,
+  AIDebuggerView,
+  ImpactAnalyzerView,
+  TestVerificationView,
+  SecurityScannerView,
+  CodeReviewView,
+  AskCodebaseView,
+  GitIntelligenceView,
+  ArchitectureView,
+  WhatIfAnalysisView,
+  MasterReferenceView,
+} from './components';
 import { api } from './api/client';
 
 export default function App() {

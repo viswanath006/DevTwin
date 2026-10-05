@@ -11,7 +11,7 @@ import {
   RefreshCw,
   AlertTriangle,
 } from 'lucide-react';
-import { api } from '../api/client';
+import { api } from '../../api/client';
 
 export default function TestVerificationView({ scanData, initialTestFile, onVerificationComplete }) {
   const [frameworks, setFrameworks] = useState([]);

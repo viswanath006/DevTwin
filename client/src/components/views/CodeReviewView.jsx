@@ -25,7 +25,7 @@ import {
   Lightbulb,
   ExternalLink,
 } from 'lucide-react';
-import { api } from '../api/client';
+import { api } from '../../api/client';
 
 // ── Severity config ────────────────────────────────────────────
 const SEVERITY_CONFIG = {

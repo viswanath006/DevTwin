@@ -1,10 +1,10 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { scanCodebase } from './services/codebaseScanner.js';
-import { buildDependencyGraph } from './services/dependencyGraph.js';
-import { analyzeCodebaseDeep } from './services/codebaseAnalyzer.js';
-import { runSecurityScan } from './services/securityScanner.js';
-import { getAIProvider } from './services/ai/aiProvider.js';
+import { scanCodebase } from '../src/services/codebaseScanner.js';
+import { buildDependencyGraph } from '../src/services/dependencyGraph.js';
+import { analyzeCodebaseDeep } from '../src/services/codebaseAnalyzer.js';
+import { runSecurityScan } from '../src/services/securityScanner.js';
+import { getAIProvider } from '../src/services/ai/aiProvider.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

@@ -83,7 +83,11 @@ function deriveCommitTags(changedFiles = [], message = '') {
  * getGitIntelligence(rootPath, projectContext)
  * Returns { isGitRepo, branch, commits, status, stats, ... }
  */
-export async function getGitIntelligence({ rootPath, projectContext = {} }) {
+export async function getGitRepositoryInfo(rootPath) {
+  return getGitIntelligence(typeof rootPath === 'string' ? { rootPath } : (rootPath || {}));
+}
+
+export async function getGitIntelligence({ rootPath, projectContext = {} } = {}) {
   if (!rootPath) {
     return { isGitRepo: false, reason: 'No repository path provided.' };
   }

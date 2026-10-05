@@ -30,7 +30,7 @@ import {
   Search,
   X,
 } from 'lucide-react';
-import { api } from '../api/client';
+import { api } from '../../api/client';
 
 // ── Risk config ─────────────────────────────────────────────────────────────
 const RISK_CONFIG = {

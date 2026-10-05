@@ -240,6 +240,8 @@ async function loadFileSnippet(rootPath, filePath, lineNum, contextLines = 4) {
 // ─────────────────────────────────────────────────────────────
 // Core Review Engine
 // ─────────────────────────────────────────────────────────────
+export const reviewCodeChanges = performCodeReview;
+
 export async function performCodeReview({
   diff,
   changedFiles = [],

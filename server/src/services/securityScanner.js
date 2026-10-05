@@ -476,6 +476,8 @@ function scanFileContent(filePath, content) {
   if (
     filePath.includes('node_modules/') ||
     filePath.includes('dist/') ||
+    filePath.includes('tests/') ||
+    filePath.includes('tests\\') ||
     filePath.includes('test-demo-mode.js') ||
     filePath.includes('test-impact.js') ||
     filePath.includes('test-http-verify.js') ||
