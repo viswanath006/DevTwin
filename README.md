@@ -1,34 +1,64 @@
 # DevTwin 🌌
 ### AI Digital Twin for your Codebase
 
+<div align="center">
+
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-devtwin--pied.vercel.app-7928CA?style=for-the-badge&logo=vercel&logoColor=white)](https://devtwin-pied.vercel.app/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-viswanath006%2FDevTwin-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/viswanath006/DevTwin)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Vercel Deployment](https://img.shields.io/badge/Deployed%20with-Vercel-black?logo=vercel)](https://devtwin-pied.vercel.app/)
 [![Node.js](https://img.shields.io/badge/Node.js-v18%2B-green.svg)](https://nodejs.org)
 [![Vite](https://img.shields.io/badge/Vite-v8.3-646CFF.svg)](https://vitejs.dev)
 [![React](https://img.shields.io/badge/React-18-61DAFB.svg)](https://reactjs.org)
-[![AI Engine](https://img.shields.io/badge/AI%20Engine-Gemini%20%7C%20OpenAI%20%7C%20Zero--Key%20Offline-orange.svg)]()
 [![Local-First](https://img.shields.io/badge/Execution-100%25%20Local%20%26%20Private-emerald.svg)]()
+[![AI Engine](https://img.shields.io/badge/AI%20Engine-Gemini%20%7C%20OpenAI%20%7C%20Zero--Key%20Offline-orange.svg)]()
 
-> **DevTwin** is an in-memory AI Digital Twin of your software codebase. It indexes repository topology, models multi-language dependency graphs, diagnoses defect root causes, predicts change impact blast radius, detects architectural drift, and verifies fixes with automated tests — all running local-first with zero cloud dependencies.
+<br/>
+
+**[🌐 Experience the Live Application](https://devtwin-pied.vercel.app/)** · **[⚡ 10-Second Judge Tour](#-the-10-second-judge-experience)** · **[🖥️ UI Architecture](#️-grand-finale-ui-architecture)** · **[🚀 Local Quickstart](#-local-quickstart-guide)** · **[🏗️ Repository Structure](#️-repository-structure)**
+
+</div>
+
+---
+
+> [!IMPORTANT]
+> **Live Web Deployment**: DevTwin is live on Vercel at **[https://devtwin-pied.vercel.app/](https://devtwin-pied.vercel.app/)**. You can test the full twin simulation, root-cause diagnosis, dependency traces, change blast radius, security auditing, and test verification directly in your browser.
+
+---
+
+## 💡 What is DevTwin?
+
+**DevTwin** is an in-memory **AI Digital Twin of your software codebase**. Rather than acting as a simple code generator, DevTwin builds a comprehensive, multi-layer semantic replica of your repository:
+- **Polyglot AST & Dependency Graph**: Discovers routes, services, database calls, and cross-file dependencies.
+- **Root-Cause Defect Localization**: Traces runtime errors (e.g. 500 status codes) directly down to the offending line of code.
+- **Blast Radius & Impact Analysis**: Calculates exactly which files, APIs, and microservices will be affected by a proposed change before you commit.
+- **Automated Patch & Test Verification**: Generates unified diffs and executes verification suites to prove fixes work.
+- **Architecture Drift & Security Auditing**: Flags architectural violations and audits for OWASP security vulnerabilities.
 
 ---
 
 ## ⚡ The 10-Second Judge Experience
 
-DevTwin is designed for developer velocity. In less than 10 seconds, any engineer or hackathon judge can answer the 5 critical software engineering questions:
+DevTwin is designed for maximum developer velocity and instant clarity. Within **10 seconds**, any judge or engineer can answer the 5 critical software engineering questions:
 
 ```
-1. WHAT PROJECT IS LOADED?   ──►  Shop-API / Polyglot microservices (Files, Components, APIs, Tests)
-2. IS THERE A PROBLEM?       ──►  500 Internal Server Error in /api/login endpoint
-3. WHAT IS THE ROOT CAUSE?   ──►  🔴 Database query uses wrong key in UserService (user_service.py:42)
-4. WHAT SHOULD I DO?         ──►  One-click unified diff patch provided (replace 'user_id' with 'id')
-5. IS THE FIX VERIFIED?      ──►  🟢 4/4 test suites passing (Authentication, User, API, Integration)
+┌─────────────────────────────────┬────────────────────────────────────────────────────────┐
+│ Question                        │ DevTwin Live Answer                                    │
+├─────────────────────────────────┼────────────────────────────────────────────────────────┤
+│ 1. WHAT PROJECT IS LOADED?      │ Shop-API (Polyglot microservices: Python, Node, Go)    │
+│ 2. IS THERE A PROBLEM?          │ 🔴 500 Internal Server Error in POST /api/login        │
+│ 3. WHAT IS THE ROOT CAUSE?      │ Database query uses wrong key in UserService (line 42) │
+│ 4. WHAT SHOULD I DO?            │ One-click unified git diff patch ready to apply        │
+│ 5. IS THE FIX VERIFIED?         │ 🟢 4/4 Test Suites Green (Auth, User, API, Integration)│
+└─────────────────────────────────┴────────────────────────────────────────────────────────┘
 ```
 
 ---
 
 ## 🖥️ Grand Finale UI Architecture
 
-DevTwin features a **cosmic developer-tool interface** inspired by modern high-density environments like Linear and Cursor:
+DevTwin features an obsidian **cosmic dark developer console** built with high-density layouts, subtle glassmorphism, and responsive reactive states:
 
 ```
 ┌───────┬────────────────────────────────────────────────────────────────────────────────────────┐
@@ -58,7 +88,97 @@ DevTwin features a **cosmic developer-tool interface** inspired by modern high-d
 
 ---
 
-## 🚀 Quickstart Guide
+## 🎯 1-Click Interactive Demo Flow
+
+You can test the entire workflow on the live site in under 60 seconds:
+
+1. **Open Live App**: Navigate to **[https://devtwin-pied.vercel.app/](https://devtwin-pied.vercel.app/)**.
+2. **Inspect the Dependency Trace**: The graph immediately isolates the critical failure path from `Frontend ──► Auth API ──► Auth Service ──► User Service`. Notice the glowing crimson beacon highlighting `User Service ●`.
+3. **Review the Root Cause**: DevTwin localizes the schema mismatch to `user_service.py:42` with 94% confidence and shows the exact diff.
+4. **Stage the Fix**: Click **`Apply patch`** to stage the corrected query syntax.
+5. **Execute Verification**: Click **`Run recommended tests`** to run automated test suites (`test_auth`, `test_user_service`, `test_api`). Watch the verification gauge spin up to a clean `4/4 Green`.
+6. **Inspect Blast Radius**: View the `CHANGE IMPACT` card showing 17 potentially affected files and 3 dependent endpoints across the codebase.
+7. **Explore More Modules**: Use the slim left rail to switch to **Security Scanner**, **Architecture Drift**, **What-If Simulation**, **Git Intelligence**, and **Code Review**.
+
+---
+
+## 🌟 Comprehensive Capability Catalog
+
+| Pillar | Capability | What It Solves |
+|---|---|---|
+| **1. Polyglot AST Indexing** | Deep parsing of JS/TS, Python, Java, Go | Maps components, classes, controllers, models, and decorators without executing arbitrary code. |
+| **2. AI Root-Cause Debugger** | Ingests stack traces & source lines | Pinpoints defect origins with evidence-based confidence metrics and generates clean unified diffs. |
+| **3. Change Impact Predictor** | 3-tier blast radius modeling | Predicts Confirmed (direct), Likely (transitive), and Possible (domain) callers before code merges. |
+| **4. OWASP Security Scanner** | Audits top 10 vulnerability vectors | Catches hardcoded secrets, SQL injection, XSS vectors, insecure JWT algorithms, and weak crypto. |
+| **5. Architecture Drift** | Expected vs. actual layer audit | Detects violations (e.g. Controller bypassing Service to query Database directly) with remediation advice. |
+| **6. What-If Simulator** | Speculative architectural forecasting | Models the blast radius of migrations (e.g. SQLite ➔ Postgres, JWT ➔ OAuth2, caching layers). |
+| **7. Git Intelligence** | Code churn & hotspot analytics | Correlates high revision churn with defect frequency to compute fragility scores per component. |
+| **8. Safe Test Runner** | Sandboxed subprocess verification | Executes whitelisted tests with strict memory guards and 15s execution timeouts. |
+
+---
+
+## 🏗️ Repository Structure
+
+```
+DevTwin/
+├── package.json                   # Root orchestrator & Vercel deployment scripts
+├── vercel.json                    # Vercel Serverless & SPA routing configuration
+├── api/                           # Serverless backend entrypoint
+│   └── index.js                   # Express serverless handler for Vercel
+├── server/                        # Express Backend Engine
+│   └── src/
+│       ├── index.js               # API route registration & server bootstrap
+│       ├── config.js              # Environment settings & AI engine flags
+│       ├── routes/                # Clean REST endpoints
+│       │   ├── health.js          # Health check & engine status
+│       │   ├── codebase.js        # File tree, AST & symbol search
+│       │   ├── debug.js           # Root-cause analysis & diff patcher
+│       │   ├── impact.js          # Change impact blast radius analyzer
+│       │   ├── verify.js          # Subprocess test runner & verification
+│       │   ├── security.js        # OWASP security & secret audit
+│       │   ├── review.js          # PR code review engine
+│       │   ├── ask.js             # Semantic codebase Q&A
+│       │   ├── git.js             # Git history & hotspot analysis
+│       │   └── architecture.js    # Architectural drift detector
+│       └── services/              # Core Twin Computation Engines
+│           ├── codebaseScanner.js # Repository AST parser & symbol catalog
+│           ├── dependencyGraph.js # Call graph & blast radius calculation
+│           ├── testRunner.js      # Safe subprocess test execution
+│           ├── securityScanner.js # OWASP static audit engine
+│           ├── codeReviewer.js    # Multi-dimensional code review
+│           ├── askCodebase.js     # Symbol-grounded natural language search
+│           ├── gitIntelligence.js # Churn & author ownership analysis
+│           ├── architectureDrift.js# Architectural layer constraint validator
+│           ├── whatIfSimulator.js # Speculative scenario simulator
+│           ├── healthScore.js     # Repository stability & technical debt score
+│           └── ai/                # Modular AI adapter layer
+│               ├── mockProvider.js    # Zero-key offline heuristic engine
+│               ├── geminiProvider.js  # Google Gemini 2.5 Flash / Pro
+│               └── openaiProvider.js  # OpenAI GPT-4o / OpenRouter
+├── client/                        # Modern React Frontend (Vite)
+│   └── src/
+│       ├── index.css              # Obsidian cosmic design system & tokens
+│       ├── App.jsx                # Layout orchestrator & navigation
+│       ├── api/client.js          # Resilient Axios/Fetch backend bridge
+│       └── components/            # Dedicated Views
+│           ├── MasterReferenceView.jsx # Grand Finale cosmic twin workspace
+│           ├── DashboardView.jsx       # System overview & topology
+│           ├── AIDebuggerView.jsx      # Diagnostic engine & patch verification
+│           ├── ImpactAnalyzerView.jsx  # Multi-modal blast radius predictor
+│           ├── SecurityScannerView.jsx # Security vulnerability audit
+│           ├── ArchitectureView.jsx    # Drift detection & layer dependency graph
+│           ├── CodeReviewView.jsx      # PR review & risk categorization
+│           ├── AskCodebaseView.jsx     # Grounded natural language codebase Q&A
+│           ├── GitIntelligenceView.jsx # Churn, hotspots & risk heatmaps
+│           └── WhatIfAnalysisView.jsx  # Speculative architectural simulation
+└── sample-projects/               # Pre-bundled evaluation repositories
+    ├── demo-cloud-app/            # Express SaaS app with realistic DB defect
+    └── demo-polyglot/             # Multi-language app (Java, Python, TS, Go)
+```
+
+---
+
+## 🚀 Local Quickstart Guide
 
 ### 1. Prerequisites
 - **Node.js**: v18.0.0 or higher
@@ -70,159 +190,55 @@ DevTwin features a **cosmic developer-tool interface** inspired by modern high-d
 git clone https://github.com/viswanath006/DevTwin.git
 cd DevTwin
 
-# Install all dependencies (root, server, and client)
+# Install all dependencies (root, backend, frontend)
 npm run install:all
 ```
 
-### 3. Launch Development Server
+### 3. Launch the Development Environment
 ```bash
 npm run dev
 ```
 
-Both services will spin up concurrently:
+Both backend and frontend will start concurrently:
 - 🌐 **Frontend UI**: [http://localhost:5173](http://localhost:5173)
 - ⚙️ **Backend API**: [http://localhost:5000](http://localhost:5000)
-- 🩺 **Health Check**: [http://localhost:5000/api/health](http://localhost:5000/api/health)
+- 🩺 **Health Endpoint**: [http://localhost:5000/api/health](http://localhost:5000/api/health)
 
-*(Optional) Configure Gemini / OpenAI in `server/.env` — by default, DevTwin runs on a built-in zero-key heuristic AI twin engine requiring **no external API keys**.*
-
----
-
-## 🎯 1-Click Grand Finale Demo Journey
-
-Experience the complete end-to-end twin workflow in 60 seconds:
-
-1. **Load Project**: Open [http://localhost:5173](http://localhost:5173). DevTwin auto-mounts the SaaS Demo microservice.
-2. **Inspect the Trace**: Observe the `DEPENDENCY TRACE` card. The visual graph highlights `User Service ●` with a glowing crimson aura as the failure origin.
-3. **Review Root Cause**: In `ROOT CAUSE`, examine the detected schema key mismatch at `user_service.py:42`.
-4. **Apply Fix**: Click **`[ Apply patch ]`** to stage the unified git diff replacement.
-5. **Verify Fix**: Click **`[ Run recommended tests ]`** to execute the test runner. Observe the `VERIFICATION` score gauge update to `4/4` green.
-6. **Evaluate Blast Radius**: Check the `CHANGE IMPACT` card to understand affected callers (3 APIs, 2 services, 17 files) before committing.
+> [!TIP]
+> **Zero API Keys Required**: DevTwin comes with a built-in offline heuristic twin engine. It works immediately out of the box without requiring any API keys. If you wish to use Gemini or OpenAI, simply add your keys to `server/.env`.
 
 ---
 
-## 🏗️ Repository Structure
+## ☁️ Deployment
 
-```
-DevTwin/
-├── package.json                   # Root orchestrator (scripts: dev, build, install:all)
-├── .env.example                   # Environment configuration template
-├── server/                        # Express Backend API
-│   └── src/
-│       ├── index.js               # Entry point & API route registration
-│       ├── config.js              # Environment & AI provider options
-│       ├── routes/                # REST endpoints
-│       │   ├── health.js          # Server & AI engine health
-│       │   ├── codebase.js        # File scanning & AST querying
-│       │   ├── debug.js           # Root-cause analysis & diff patcher
-│       │   ├── impact.js          # Blast radius & change impact analyzer
-│       │   ├── verify.js          # Test runner & verification engine
-│       │   ├── security.js        # Vulnerability & secret scanner
-│       │   ├── review.js          # Automated pull-request code reviewer
-│       │   ├── ask.js             # Grounded codebase natural language Q&A
-│       │   ├── git.js             # Git history & hotspot intelligence
-│       │   └── architecture.js    # Architecture drift & layer validator
-│       └── services/              # Core Twin Engines
-│           ├── codebaseScanner.js # Local repository AST & symbol indexing
-│           ├── dependencyGraph.js # Call graph & blast radius calculation
-│           ├── testRunner.js      # Safe subprocess test execution
-│           ├── securityScanner.js # OWASP & static code security auditing
-│           ├── codeReviewer.js    # Multi-dimensional code review engine
-│           ├── askCodebase.js     # Semantic & symbol-grounded search
-│           ├── gitIntelligence.js # Churn, hotspot & author ownership analysis
-│           ├── architectureDrift.js# Expected vs. actual architecture drift detector
-│           ├── whatIfSimulator.js # Speculative architectural change simulator
-│           ├── healthScore.js     # Codebase stability & technical debt metric
-│           └── ai/                # Modular AI adapter layer
-│               ├── mockProvider.js    # Zero-key offline heuristic engine
-│               ├── geminiProvider.js  # Google Gemini 2.5 Flash / Pro
-│               └── openaiProvider.js  # OpenAI GPT-4o / OpenRouter
-├── client/                        # Modern React Frontend (Vite)
-│   └── src/
-│       ├── index.css              # Obsidian cosmic design system & animations
-│       ├── App.jsx                # Layout orchestrator & router
-│       ├── api/client.js          # Typed Axios/Fetch backend bridge
-│       └── components/            # UI Views & Panels
-│           ├── MasterReferenceView.jsx # Grand Finale cosmic twin workspace
-│           ├── DashboardView.jsx       # Streamlined overview & architecture flow
-│           ├── AIDebuggerView.jsx      # Root cause diagnosis & diff verification
-│           ├── ImpactAnalyzerView.jsx  # Multi-modal blast radius predictor
-│           ├── SecurityScannerView.jsx # Vulnerability audit & remediation
-│           ├── ArchitectureView.jsx    # Drift detection & layer dependency graph
-│           ├── CodeReviewView.jsx      # PR code review with security/quality tags
-│           ├── AskCodebaseView.jsx     # Grounded natural language codebase Q&A
-│           ├── GitIntelligenceView.jsx # Git churn, hotspots & risk heatmaps
-│           └── WhatIfAnalysisView.jsx  # Speculative architectural change simulation
-└── sample-projects/               # Bundled evaluation codebases
-    ├── demo-cloud-app/            # Express SaaS app with realistic DB defect
-    └── demo-polyglot/             # Multi-language app (Java, Python, TS, Go)
-```
+### Vercel (Production)
+DevTwin is configured for instantaneous deployment to Vercel:
+1. Fork or clone this repository.
+2. Import the project into your [Vercel Dashboard](https://vercel.com).
+3. The included `vercel.json` and `api/index.js` automatically configure both the Vite frontend build and the Express serverless API routes.
+4. Live reference deployment: **[https://devtwin-pied.vercel.app/](https://devtwin-pied.vercel.app/)**
 
 ---
 
-## 🌟 Comprehensive Capability Catalog
+## 🔒 Security & Anti-Hallucination Guarantees
 
-### 1. 🔍 Polyglot AST Codebase Indexing
-- **Supported Languages**: Python (`.py`, `requirements.txt`), JavaScript/TypeScript (`.js`, `.jsx`, `.ts`, `.tsx`, `package.json`), Java (`.java`, `pom.xml`, `build.gradle`), Go, JSON, and YAML.
-- **Symbol & Route Extraction**: Maps controllers, route decorators (`@app.get`, `router.post`, `@GetMapping`), models, repositories, and unit tests with exact file and line references.
+DevTwin is engineered under strict production principles:
 
-### 2. 🧠 AI Root-Cause Debugger
-- **Grounded Defect Diagnosis**: Ingests error traces, stack dumps, and local source files to localize defects without hallucinating non-existent modules.
-- **Evidence-Based Confidence**: Confidence strictly mirrors physical code matches (e.g. 94% when target function and table column match).
-- **Unified Diff Patching**: Emits standard git unified diffs ready for review or automatic verification.
-
-### 3. 💥 Change Impact & Blast Radius Analysis
-- **3-Tier Dependency Tiers**: Categorizes blast radius into **Confirmed** (direct callers/importers), **Likely** (transitive callers), and **Possible** (domain co-located modules).
-- **Multi-Modal Inputs**: Accepts Git Diffs, changed code snippets, or natural language intent descriptions.
-
-### 4. 🛡️ OWASP AI Security Scanner
-- Audits code against 10 critical vulnerability vectors:
-  1. Hardcoded API keys, JWT secrets, and credentials
-  2. SQL & Command injection vectors
-  3. Unsanitized user input & XSS vulnerabilities
-  4. Broken authentication & weak hashing (MD5/SHA1)
-  5. Vulnerable third-party package dependencies
-  6. Permissive CORS & unencrypted transports
-  7. Sensitive information leaking into logs
-  8. Missing rate limiting & broken access control
-
-### 5. 🏗️ Architecture Drift Detection
-- Compares declared/expected architectural contracts (`Controller ──► Service ──► Repository ──► Database`) against actual physical dependency imports.
-- Flags illegal architectural drift (e.g. Controllers directly executing queries against Database, bypassing Service business logic).
-
-### 6. 🔮 What-If Architectural Simulation
-- Predicts systemic blast radius of speculative high-level technical decisions:
-  - Migrating authentication from JWT to OAuth2
-  - Swapping persistence from SQLite to PostgreSQL with connection pooling
-  - Introducing Redis caching layers in front of repositories
-  - Enforcing multi-tenant Organization ID partition filters
-
-### 7. 📈 Git Intelligence & Code Hotspots
-- Analyzes commit history, revision frequency, code churn, and author ownership.
-- Correlates high churn frequency with defect rates to calculate component fragility indices.
-
-### 8. 🧪 Safe Sandbox Verification Engine
-- Whitelisted, sandboxed process execution for `pytest`, `npm test`, `mvn test`, and `gradle test`.
-- Subprocess timeout guards (15s) and memory caps preventing accidental infinite loops or fork bombs.
-
----
-
-## 🔒 Security & Anti-Hallucination Principles
-
-DevTwin follows strict engineering guardrails:
-
-- **Zero Cloud Leakage**: Repository code is analyzed locally on your machine.
-- **Strict Evidence Grounding**: The AI model is strictly prohibited from asserting facts unsupported by AST file symbols. When evidence is insufficient, it explicitly outputs `"Insufficient Codebase Evidence"`.
-- **Non-Destructive Execution**: DevTwin never modifies files on disk without explicit developer confirmation.
+- **100% Local-First & Private**: Repository source code never leaves your local environment or serverless runtime.
+- **Strict Evidence Grounding**: The AI model is strictly prohibited from fabricating files, symbols, or functions. If evidence cannot be found in the AST index, DevTwin outputs `"Insufficient Codebase Evidence"`.
+- **Non-Destructive Execution**: DevTwin generates unified diffs and previews changes safely without writing to disk unless explicitly commanded.
+- **Sandbox Test Guardrails**: Test execution uses strict subprocess execution limits, disabling shell interpolation and enforcing execution timeouts.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
 ---
 
-<p align="center">
-  <b>Built for Hackathon Grand Finale · Powered by Antigravity</b>
-</p>
+<div align="center">
+
+**[Explore DevTwin Live](https://devtwin-pied.vercel.app/)** · Built with ❤️ for the Hackathon Grand Finale
+
+</div>
