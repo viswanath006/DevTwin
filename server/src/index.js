@@ -88,11 +88,15 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start Server
-app.listen(config.port, () => {
-  console.log('====================================================');
-  console.log(`🚀 DevTwin Server running at http://localhost:${config.port}`);
-  console.log(`📡 AI Provider: ${config.aiProvider.toUpperCase()}`);
-  console.log(`🔗 Health Check: http://localhost:${config.port}/api/health`);
-  console.log('====================================================');
-});
+export default app;
+
+// Start Server (only when not in Vercel serverless environment)
+if (!process.env.VERCEL) {
+  app.listen(config.port, () => {
+    console.log('====================================================');
+    console.log(`🚀 DevTwin Server running at http://localhost:${config.port}`);
+    console.log(`📡 AI Provider: ${config.aiProvider.toUpperCase()}`);
+    console.log(`🔗 Health Check: http://localhost:${config.port}/api/health`);
+    console.log('====================================================');
+  });
+}
