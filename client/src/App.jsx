@@ -160,32 +160,23 @@ export default function App() {
     setActiveTab('impact');
   };
 
-  if (activeTab === 'dashboard') {
-    return (
-      <MasterReferenceView
-        scanData={scanData}
-        onNavigateToTab={setActiveTab}
-      />
-    );
-  }
-
   return (
-    <div className="app-container">
-      {/* Left Sidebar */}
+    <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', background: '#070913' }}>
+      {/* Left Slim Rail Dock */}
       <Sidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        health={health}
         isConnected={isConnected}
         onLoadDemo={handleLoadDemoProject}
       />
 
-      {/* Main Content Area */}
-      <div className="main-wrapper">
-        {/* Top Header */}
+      {/* Main Cosmic Canvas Area */}
+      <main className="ref-canvas">
+        {/* Dynamic Top Header */}
         <Header
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
           repoPath={repoPath}
-          setRepoPath={setRepoPath}
           onScan={handleScan}
           onFolderUpload={handleFolderUpload}
           onLoadDemo={handleLoadDemoProject}
@@ -194,108 +185,99 @@ export default function App() {
         />
 
         {/* View Routing */}
-        {activeTab === 'dashboard' && (
-          <DashboardView
-            scanData={scanData}
-            setActiveTab={setActiveTab}
-            onScan={handleScan}
-            onLoadDemo={handleLoadDemoProject}
-            isScanning={isScanning}
-            error={scanError}
-            onNavigateToDebugger={handleNavigateToDebugger}
-            onNavigateToImpact={handleNavigateToImpact}
-            onNavigateToVerification={handleNavigateToVerification}
-          />
-        )}
+        <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
+          {activeTab === 'dashboard' && (
+            <MasterReferenceView
+              scanData={scanData}
+              onNavigateToTab={setActiveTab}
+              embedded={true}
+            />
+          )}
 
-        {(activeTab === 'codebase' || activeTab === 'analyzer') && (
-          <ProjectAnalyzerView
-            scanData={scanData}
-            onNavigateToImpact={handleNavigateToImpact}
-            onNavigateToDebugger={handleNavigateToDebugger}
-          />
-        )}
+          {(activeTab === 'codebase' || activeTab === 'analyzer') && (
+            <ProjectAnalyzerView
+              scanData={scanData}
+              onNavigateToImpact={handleNavigateToImpact}
+              onNavigateToDebugger={handleNavigateToDebugger}
+            />
+          )}
 
-        {activeTab === 'architecture' && (
-          <ArchitectureView
-            scanData={scanData}
-            onNavigateToCodebase={(file) => {
-              setActiveTab('codebase');
-            }}
-            onNavigateToDebugger={handleNavigateToDebugger}
-            onNavigateToImpact={handleNavigateToImpact}
-            onLoadDemo={handleLoadDemoProject}
-          />
-        )}
+          {activeTab === 'architecture' && (
+            <ArchitectureView
+              scanData={scanData}
+              onNavigateToCodebase={() => setActiveTab('codebase')}
+              onNavigateToDebugger={handleNavigateToDebugger}
+              onNavigateToImpact={handleNavigateToImpact}
+              onLoadDemo={handleLoadDemoProject}
+            />
+          )}
 
-        {activeTab === 'debugger' && (
-          <AIDebuggerView
-            scanData={scanData}
-            initialFile={sharedFixContext.targetFile}
-            initialError={sharedFixContext.initialError}
-            initialLogs={sharedFixContext.initialLogs}
-            onNavigateToImpact={handleNavigateToImpact}
-            onNavigateToVerification={handleNavigateToVerification}
-          />
-        )}
+          {activeTab === 'debugger' && (
+            <AIDebuggerView
+              scanData={scanData}
+              initialFile={sharedFixContext.targetFile}
+              initialError={sharedFixContext.initialError}
+              initialLogs={sharedFixContext.initialLogs}
+              onNavigateToImpact={handleNavigateToImpact}
+              onNavigateToVerification={handleNavigateToVerification}
+            />
+          )}
 
-        {activeTab === 'impact' && (
-          <ImpactAnalyzerView
-            scanData={scanData}
-            targetFileProp={sharedFixContext.targetFile}
-            initialDiffProp={sharedFixContext.proposedPatch}
-          />
-        )}
+          {activeTab === 'impact' && (
+            <ImpactAnalyzerView
+              scanData={scanData}
+              targetFileProp={sharedFixContext.targetFile}
+              initialDiffProp={sharedFixContext.proposedPatch}
+            />
+          )}
 
-        {activeTab === 'verification' && (
-          <TestVerificationView
-            scanData={scanData}
-            initialTestFile={sharedFixContext.testFile}
-            onVerificationComplete={(result) => {
-              setSharedFixContext((prev) => ({ ...prev, verificationResult: result }));
-            }}
-          />
-        )}
+          {activeTab === 'verification' && (
+            <TestVerificationView
+              scanData={scanData}
+              initialTestFile={sharedFixContext.testFile}
+              onVerificationComplete={(result) => {
+                setSharedFixContext((prev) => ({ ...prev, verificationResult: result }));
+              }}
+            />
+          )}
 
-        {activeTab === 'security' && (
-          <SecurityScannerView
-            scanData={scanData}
-            onNavigateToAnalyzer={(filePath) => {
-              setActiveTab('analyzer');
-            }}
-            onNavigateToDebugger={handleNavigateToDebugger}
-          />
-        )}
+          {activeTab === 'security' && (
+            <SecurityScannerView
+              scanData={scanData}
+              onNavigateToDebugger={handleNavigateToDebugger}
+            />
+          )}
 
-        {activeTab === 'review' && (
-          <CodeReviewView
-            scanData={scanData}
-            onNavigateToDebugger={handleNavigateToDebugger}
-            onNavigateToSecurity={() => setActiveTab('security')}
-          />
-        )}
+          {activeTab === 'review' && (
+            <CodeReviewView
+              scanData={scanData}
+              onNavigateToDebugger={handleNavigateToDebugger}
+              onNavigateToSecurity={() => setActiveTab('security')}
+            />
+          )}
 
-        {activeTab === 'ask' && (
-          <AskCodebaseView
-            scanData={scanData}
-            onNavigateToDebugger={handleNavigateToDebugger}
-            onNavigateToImpact={handleNavigateToImpact}
-          />
-        )}
+          {activeTab === 'ask' && (
+            <AskCodebaseView
+              scanData={scanData}
+              onNavigateToDebugger={handleNavigateToDebugger}
+              onNavigateToImpact={handleNavigateToImpact}
+            />
+          )}
 
-        {activeTab === 'git' && (
-          <GitIntelligenceView
-            scanData={scanData}
-          />
-        )}
+          {activeTab === 'git' && (
+            <GitIntelligenceView
+              scanData={scanData}
+            />
+          )}
 
-        {activeTab === 'whatif' && (
-          <WhatIfAnalysisView
-            scanData={scanData}
-            onNavigateToDebugger={handleNavigateToDebugger}
-          />
-        )}
-      </div>
+          {activeTab === 'whatif' && (
+            <WhatIfAnalysisView
+              scanData={scanData}
+              onNavigateToDebugger={handleNavigateToDebugger}
+            />
+          )}
+        </div>
+      </main>
     </div>
   );
 }
