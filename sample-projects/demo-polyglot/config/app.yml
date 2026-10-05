@@ -1,0 +1,14 @@
+# Application Configuration
+database:
+  host: localhost
+  port: 5432
+  name: devtwin_demo
+  pool_size: 10
+
+jwt:
+  secret: \
+  expiry: 86400
+
+logging:
+  level: INFO
+  format: json

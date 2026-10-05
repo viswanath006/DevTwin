@@ -1,0 +1,21 @@
+{
+  "name": "demo-cloud-app",
+  "version": "1.0.0",
+  "description": "Cloud SaaS User & Authentication Service (DevTwin Demo Application)",
+  "main": "src/api/userController.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/api/userController.js",
+    "test": "node tests/run_demo_tests.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "vitest": "^1.6.0"
+  }
+}

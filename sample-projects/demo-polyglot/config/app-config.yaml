@@ -1,0 +1,10 @@
+app:
+  name: "Polyglot Microservices"
+  env: "production"
+  port: 8080
+  telemetry:
+    enabled: true
+    samplingRate: 0.1
+security:
+  corsOrigins:
+    - "https://app.devtwin.local"
