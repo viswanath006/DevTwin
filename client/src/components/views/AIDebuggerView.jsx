@@ -355,7 +355,7 @@ export default function AIDebuggerView({
                 padding: '0 28px',
                 fontSize: '0.92rem',
                 fontWeight: 700,
-                background: verifyResult?.isVerified ? 'var(--color-success)' : 'var(--accent-primary)',
+                ...(verifyResult?.isVerified ? { background: 'linear-gradient(180deg, #10B981 0%, #059669 100%)', borderColor: 'rgba(52, 211, 153, 0.5)' } : {}),
               }}
               onClick={handleVerify}
               disabled={verifying}

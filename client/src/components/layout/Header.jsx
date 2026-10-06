@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
-import { RefreshCw, Upload, Sparkles } from 'lucide-react';
+import { RefreshCw, Upload, Sparkles, User, LogOut } from 'lucide-react';
+import DevTwinLogo from '../common/DevTwinLogo';
 
 const HEADINGS = {
   dashboard: {
     title: (
       <>
-        Why is <span className="serif-italic" style={{ color: '#F1F5F9', fontWeight: 400 }}>login</span> failing?
+        Why is <span className="serif-italic" style={{ color: '#F87171', fontWeight: 400 }}>login</span> failing?
       </>
     ),
     subtitle: 'POST /api/login returned 500 — traced across 5 layers of your codebase.',
@@ -21,7 +22,7 @@ const HEADINGS = {
   impact: {
     title: (
       <>
-        Change Impact — Predict what <span className="serif-italic" style={{ color: '#C084FC', fontWeight: 400 }}>breaks</span> before shipping.
+        Change Impact — Predict what <span className="serif-italic" style={{ color: '#F87171', fontWeight: 400 }}>breaks</span> before shipping.
       </>
     ),
     subtitle: 'AST blast-radius analysis across APIs, services, and regression suites.',
@@ -74,6 +75,14 @@ const HEADINGS = {
     ),
     subtitle: 'Identify fragile components, ownership distribution, and change frequency.',
   },
+  verification: {
+    title: (
+      <>
+        Test Verification — Sandboxed <span className="serif-italic" style={{ color: '#34D399', fontWeight: 400 }}>assertion</span> runner.
+      </>
+    ),
+    subtitle: 'Strict anti-hallucination verification engine proving code correctness.',
+  },
 };
 
 export default function Header({
@@ -85,6 +94,8 @@ export default function Header({
   onLoadDemo,
   isScanning,
   stats,
+  currentUser,
+  onLogout,
 }) {
   const fileInputRef = useRef(null);
 
@@ -114,47 +125,62 @@ export default function Header({
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 24, padding: '0 4px' }}>
-      {/* Left: Project tag, Serif Headline, Subtitle */}
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        marginBottom: 20,
+        padding: '0 4px',
+        flexWrap: 'wrap',
+        gap: 16,
+      }}
+    >
+      {/* Left: Project tag, Headline, Subtitle */}
       <div>
         <div
           style={{
             fontSize: '0.72rem',
             fontWeight: 700,
-            color: '#94A3B8',
+            color: '#EF4444',
             letterSpacing: '0.12em',
             textTransform: 'uppercase',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
           }}
         >
-          DEVTWIN · {projectName}
+          <DevTwinLogo size={16} />
+          <span>DEVTWIN · {projectName}</span>
         </div>
 
         <h1
           style={{
-            fontSize: '2.1rem',
+            fontSize: '2.05rem',
             fontWeight: 700,
             color: '#FFFFFF',
             letterSpacing: '-0.02em',
             lineHeight: 1.15,
-            marginTop: 6,
+            marginTop: 4,
           }}
         >
           {headingInfo.title}
         </h1>
 
-        <p style={{ fontSize: '0.88rem', color: '#94A3B8', marginTop: 6, fontWeight: 400 }}>
+        <p style={{ fontSize: '0.86rem', color: '#94A3B8', marginTop: 4, fontWeight: 400 }}>
           {headingInfo.subtitle}
         </p>
       </div>
 
-      {/* Right: Switcher Pills + Scan/Demo buttons */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 4 }}>
+      {/* Right: Switcher Pills + User Status + Scan/Demo buttons */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 4, flexWrap: 'wrap' }}>
         {/* Navigation Pills */}
         {[
           { id: 'dashboard', label: 'Twin' },
           { id: 'debugger', label: 'Debug' },
           { id: 'impact', label: 'Impact' },
           { id: 'security', label: 'Security' },
+          { id: 'verification', label: 'Verify' },
         ].map((item) => {
           const isActive = activeTab === item.id;
           return (
@@ -163,18 +189,18 @@ export default function Header({
               onClick={() => setActiveTab(item.id)}
               style={{
                 background: isActive
-                  ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(241, 245, 249, 0.88) 100%)'
+                  ? 'linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)'
                   : 'rgba(255, 255, 255, 0.04)',
                 backdropFilter: 'blur(14px) saturate(180%)',
                 WebkitBackdropFilter: 'blur(14px) saturate(180%)',
-                color: isActive ? '#070913' : '#94A3B8',
-                border: isActive ? '1px solid rgba(255, 255, 255, 0.7)' : '1px solid rgba(255, 255, 255, 0.09)',
+                color: isActive ? '#FFFFFF' : '#94A3B8',
+                border: isActive ? '1px solid rgba(255, 120, 120, 0.45)' : '1px solid rgba(255, 255, 255, 0.09)',
                 boxShadow: isActive
-                  ? 'inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 4px 14px rgba(255, 255, 255, 0.2)'
+                  ? 'inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 4px 14px rgba(239, 68, 68, 0.35)'
                   : 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 6px rgba(0, 0, 0, 0.25)',
                 borderRadius: 20,
-                padding: '6px 18px',
-                fontSize: '0.82rem',
+                padding: '6px 16px',
+                fontSize: '0.8rem',
                 fontWeight: 700,
                 cursor: 'pointer',
                 transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -184,6 +210,45 @@ export default function Header({
             </button>
           );
         })}
+
+        {/* Demo Developer User Badge */}
+        {currentUser && (
+          <div
+            style={{
+              background: 'rgba(239, 68, 68, 0.1)',
+              border: '1px solid rgba(239, 68, 68, 0.28)',
+              borderRadius: 20,
+              padding: '4px 12px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              fontSize: '0.74rem',
+              color: '#F87171',
+            }}
+          >
+            <User size={12} />
+            <span>Developer</span>
+            {onLogout && (
+              <button
+                type="button"
+                onClick={onLogout}
+                title="Sign out of demo account"
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: '#94A3B8',
+                  padding: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  marginLeft: 2,
+                }}
+              >
+                <LogOut size={12} />
+              </button>
+            )}
+          </div>
+        )}
 
         {/* Runs locally badge */}
         <div
@@ -195,8 +260,8 @@ export default function Header({
             boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1)',
             color: '#34D399',
             borderRadius: 20,
-            padding: '6px 14px',
-            fontSize: '0.78rem',
+            padding: '5px 12px',
+            fontSize: '0.74rem',
             fontWeight: 600,
             display: 'flex',
             alignItems: 'center',
@@ -205,8 +270,8 @@ export default function Header({
         >
           <span
             style={{
-              width: 7,
-              height: 7,
+              width: 6,
+              height: 6,
               borderRadius: '50%',
               background: '#10B981',
               boxShadow: '0 0 8px #10B981',
@@ -220,22 +285,8 @@ export default function Header({
           onClick={() => onScan()}
           disabled={isScanning}
           title="Re-scan codebase"
-          style={{
-            background: 'rgba(255, 255, 255, 0.05)',
-            backdropFilter: 'blur(14px) saturate(180%)',
-            WebkitBackdropFilter: 'blur(14px) saturate(180%)',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
-            boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 2px 8px rgba(0, 0, 0, 0.25)',
-            color: '#CBD5E1',
-            borderRadius: 20,
-            padding: '6px 14px',
-            fontSize: '0.78rem',
-            cursor: isScanning ? 'not-allowed' : 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 5,
-            transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
+          className="btn-secondary"
+          style={{ height: 32, padding: '0 12px', fontSize: '0.76rem', borderRadius: 20 }}
         >
           <RefreshCw size={12} className={isScanning ? 'spin' : ''} />
           {isScanning ? 'Scanning…' : 'Scan'}
@@ -245,23 +296,8 @@ export default function Header({
           onClick={() => onLoadDemo()}
           disabled={isScanning}
           title="Load built-in SaaS demo project"
-          style={{
-            background: 'linear-gradient(135deg, rgba(255, 107, 107, 0.22) 0%, rgba(255, 142, 83, 0.18) 100%)',
-            backdropFilter: 'blur(14px) saturate(180%)',
-            WebkitBackdropFilter: 'blur(14px) saturate(180%)',
-            border: '1px solid rgba(255, 107, 107, 0.45)',
-            boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.35), 0 3px 12px rgba(255, 107, 107, 0.22)',
-            color: '#FF8E53',
-            borderRadius: 20,
-            padding: '6px 14px',
-            fontSize: '0.78rem',
-            fontWeight: 600,
-            cursor: isScanning ? 'not-allowed' : 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 5,
-            transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
+          className="btn-primary"
+          style={{ height: 32, padding: '0 14px', fontSize: '0.76rem', borderRadius: 20 }}
         >
           <Sparkles size={12} />
           Demo
@@ -281,22 +317,8 @@ export default function Header({
           onClick={() => fileInputRef.current?.click()}
           disabled={isScanning}
           title="Upload project folder"
-          style={{
-            background: 'rgba(255, 255, 255, 0.05)',
-            backdropFilter: 'blur(14px) saturate(180%)',
-            WebkitBackdropFilter: 'blur(14px) saturate(180%)',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
-            boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 2px 8px rgba(0, 0, 0, 0.25)',
-            color: '#94A3B8',
-            borderRadius: 20,
-            padding: '6px 12px',
-            fontSize: '0.78rem',
-            cursor: isScanning ? 'not-allowed' : 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
+          className="btn-secondary"
+          style={{ height: 32, width: 34, padding: 0, borderRadius: 20, justifyContent: 'center' }}
         >
           <Upload size={12} />
         </button>

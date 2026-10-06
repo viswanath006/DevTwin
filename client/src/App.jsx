@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Sidebar,
   Header,
+  Footer,
   DashboardView,
   ProjectAnalyzerView,
   AIDebuggerView,
@@ -14,10 +15,21 @@ import {
   ArchitectureView,
   WhatIfAnalysisView,
   MasterReferenceView,
+  LoginView,
 } from './components';
 import { api } from './api/client';
 
 export default function App() {
+  // Demo Authentication State (stored safely in localStorage)
+  const [currentUser, setCurrentUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('devtwin_auth');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+
   const [activeTab, setActiveTab] = useState('dashboard');
   const [health, setHealth] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
@@ -28,10 +40,12 @@ export default function App() {
 
   // Shared workflow context across Debugger, Impact Analyzer, and Verification
   const [sharedFixContext, setSharedFixContext] = useState({
-    targetFile: 'sample-projects/demo-polyglot/services/broken_calculator.py',
-    proposedPatch: '',
-    recommendedTests: [],
-    testFile: 'sample-projects/demo-polyglot/tests/test_calculator.py',
+    targetFile: 'src/repositories/userRepository.js',
+    initialError: "500 Internal Server Error: DatabaseValidationError: Column 'user_id' does not exist. Expected 'id'.",
+    initialLogs: `500 Internal Server Error: DatabaseValidationError: Column or key 'user_id' does not exist in table 'users'.\n    at UserRepository.findById (src/repositories/userRepository.js:34:13)\n    at UserService.getUserProfile (src/services/userService.js:18:38)\n    at userController.getUser (src/api/userController.js:19:35)`,
+    proposedPatch: `--- a/src/repositories/userRepository.js\n+++ b/src/repositories/userRepository.js\n@@ -32,5 +32,5 @@\n-    const primaryKey = record['user_id'];\n+    const primaryKey = record['id'];\n     return {\n-      id: record['user_id'],\n+      id: record['id'],\n       email: record.email,`,
+    recommendedTests: ['tests/user.test.js', 'tests/auth.test.js'],
+    testFile: 'tests/run_demo_tests.js',
     command: 'devtwin-verify all',
     verificationResult: null,
   });
@@ -65,7 +79,7 @@ export default function App() {
     }
   };
 
-  // Check health and establish connection on mount
+  // Check health on mount and establish background connection
   useEffect(() => {
     checkServerConnection();
     const interval = setInterval(checkServerConnection, 8000);
@@ -97,8 +111,7 @@ export default function App() {
   };
 
   /**
-   * Phase 9: Demo Mode - Loads built-in SaaS application with database key error
-   * Executes through the exact same scanning, AST parsing, and AI analysis pipeline
+   * Load Demo Mode SaaS Application
    */
   const handleLoadDemoProject = async () => {
     setIsScanning(true);
@@ -109,7 +122,6 @@ export default function App() {
         setScanData(res.data);
         setRepoPath(res.data.rootPath);
 
-        // Pre-configure shared workflow context for the 14-step demo journey
         if (res.data.demoScenario) {
           setSharedFixContext({
             targetFile: res.data.demoScenario.targetFile,
@@ -134,12 +146,12 @@ export default function App() {
     }
   };
 
-  // Seamless navigation handlers connecting the 14-step primary journey
+  // Seamless navigation handlers connecting the primary journey
   const handleNavigateToDebugger = (filePath, error) => {
     setSharedFixContext((prev) => ({
       ...prev,
       targetFile: filePath || prev.targetFile,
-      error: error || prev.error,
+      initialError: error || prev.initialError,
     }));
     setActiveTab('debugger');
   };
@@ -162,18 +174,37 @@ export default function App() {
     setActiveTab('impact');
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('devtwin_auth');
+    setCurrentUser(null);
+  };
+
+  // If user is not logged in, present clean Demo Developer Login experience
+  if (!currentUser) {
+    return (
+      <LoginView
+        onLoginSuccess={(user) => {
+          setCurrentUser(user);
+          setActiveTab('dashboard');
+        }}
+      />
+    );
+  }
+
   return (
-    <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', background: '#070913' }}>
+    <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', background: '#08090C' }}>
       {/* Left Slim Rail Dock */}
       <Sidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         isConnected={isConnected}
         onLoadDemo={handleLoadDemoProject}
+        currentUser={currentUser}
+        onLogout={handleLogout}
       />
 
-      {/* Main Cosmic Canvas Area */}
-      <main className="ref-canvas">
+      {/* Main Workspace Canvas Area */}
+      <main className="ref-canvas" style={{ display: 'flex', flexDirection: 'column' }}>
         {/* Dynamic Top Header */}
         <Header
           activeTab={activeTab}
@@ -184,11 +215,26 @@ export default function App() {
           onLoadDemo={handleLoadDemoProject}
           isScanning={isScanning}
           stats={scanData?.stats}
+          currentUser={currentUser}
+          onLogout={handleLogout}
         />
 
-        {/* View Routing */}
-        <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
+        {/* View Routing with smooth enter animations */}
+        <div className="view-enter" style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
           {activeTab === 'dashboard' && (
+            <DashboardView
+              scanData={scanData}
+              onScan={handleScan}
+              onLoadDemo={handleLoadDemoProject}
+              isScanning={isScanning}
+              onNavigateToTab={setActiveTab}
+              onNavigateToDebugger={handleNavigateToDebugger}
+              onNavigateToImpact={handleNavigateToImpact}
+              onNavigateToVerification={handleNavigateToVerification}
+            />
+          )}
+
+          {activeTab === 'twin-details' && (
             <MasterReferenceView
               scanData={scanData}
               onNavigateToTab={setActiveTab}
@@ -279,6 +325,9 @@ export default function App() {
             />
           )}
         </div>
+
+        {/* Minimal Footer (Requirement 8) */}
+        <Footer />
       </main>
     </div>
   );

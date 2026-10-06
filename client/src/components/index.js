@@ -1,6 +1,7 @@
 // Layout Components
 export { default as Header } from './layout/Header';
 export { default as Sidebar } from './layout/Sidebar';
+export { default as Footer } from './layout/Footer';
 
 // View Components
 export { default as DashboardView } from './views/DashboardView';
@@ -18,3 +19,6 @@ export { default as MasterReferenceView } from './views/MasterReferenceView';
 
 // Common Components
 export { default as CodebaseHealthCard } from './common/CodebaseHealthCard';
+export { default as DevTwinLogo } from './common/DevTwinLogo';
+export { default as BackgroundVideo } from './common/BackgroundVideo';
+export { default as LoginView } from './common/LoginView';
